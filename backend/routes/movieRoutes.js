@@ -1,12 +1,15 @@
 import { Router } from "express";
-import { createMovie } from "../controllers/movieController.js";
+import {
+  fetchAllMovies,
+  fetchMovie,
+  createMovie,
+  updateMovie,
+  deleteMovie,
+} from "../controllers/movieControllers/index.js";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.status(200).send({ message: "Hello World" });
-});
-
-router.post("/", createMovie);
+router.route("/").get(fetchAllMovies).post(createMovie);
+router.route("/:id").get(fetchMovie).put(updateMovie).delete(deleteMovie);
 
 export default router;

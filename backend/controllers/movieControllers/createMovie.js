@@ -1,5 +1,5 @@
-import Movie from "../models/Movie.js";
-import validateMovie from "../utils/validateMovie.js";
+import Movie from "../../models/Movie.js";
+import validateMovie from "../../utils/validateMovie.js";
 
 export const createMovie = async (req, res) => {
   // Validate input
@@ -24,14 +24,14 @@ export const createMovie = async (req, res) => {
     res.status(201).json({
       success: true,
       message: "Movie added successfully! ",
-      movie: newMovie,
+      data: newMovie,
     });
   } catch (error) {
     if (error.name === "ValidationError") {
       return res.status(400).json({ success: false, message: error.message });
     }
 
-    console.error("Error adding movie: ", error);
+    console.error("Error creating movie: ", error.message);
     res.status(500).json({ success: false, message: "Internal server error!" });
   }
 };
