@@ -1,5 +1,12 @@
+import MovieList from "./components/MovieList";
 const App = () => {
-  return <div className="bg-red-600">App</div>;
+  return (
+    <div>
+      <main>
+        <MovieList />
+      </main>
+    </div>
+  );
 };
 
 export default App;
