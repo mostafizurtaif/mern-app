@@ -7,8 +7,9 @@ import {
 } from "react-icons/md";
 import { SiRottentomatoes } from "react-icons/si";
 import { formatTime } from "../utils/formatTime.js";
+import { Link } from "react-router-dom";
 
-const MovieCard = ({ title, duration, releaseYear, rating }) => {
+const MovieCard = ({ _id, title, duration, releaseYear, rating }) => {
   return (
     <div className="rounded-lg border border-gray-300 p-3.5">
       <div className="flex flex-col gap-y-1">
@@ -36,17 +37,26 @@ const MovieCard = ({ title, duration, releaseYear, rating }) => {
 
       <div className="flex justify-end">
         <div className="flex gap-2">
-          <a href="/" className="flex items-center justify-between">
+          <Link
+            to={`/movie/details/${_id}`}
+            className="flex items-center justify-between"
+          >
             <MdInfo className="text-2xl text-blue-500 transition duration-150 hover:text-blue-700" />
-          </a>
+          </Link>
 
-          <a href="/" className="flex items-center justify-between">
+          <Link
+            to={`/movie/edit/${_id}`}
+            className="flex items-center justify-between"
+          >
             <MdEdit className="text-2xl text-amber-500 transition duration-150 hover:text-amber-700" />
-          </a>
+          </Link>
 
-          <a href="/" className="flex items-center justify-between">
+          <Link
+            to={`/movie/delete/${_id}`}
+            className="flex items-center justify-between"
+          >
             <MdDelete className="text-2xl text-red-500 transition duration-150 hover:text-red-700" />
-          </a>
+          </Link>
         </div>
       </div>
     </div>

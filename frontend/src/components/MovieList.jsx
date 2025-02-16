@@ -2,26 +2,32 @@ import MovieCard from "./MovieCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Spinner from "./Spinner";
+import ErrorMessage from "./ErrorMessage";
 
 const MovieList = () => {
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
+    const fetchMovies = async () => {
+      setLoading(true);
+      setError(null);
 
-    axios
-      .get("http://localhost:5050")
-      .then((res) => {
-        setMovies(res.data.data);
+      try {
+        const response = await axios.get("http://localhost:5050");
+
+        setMovies(response.data.data);
         setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching movies: ", error);
-      })
-      .finally(() => {
+      } catch (error) {
+        setError(error);
+        console.error("Error fetching movies: ", error.message);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchMovies();
   }, []);
 
   return (
@@ -31,6 +37,8 @@ const MovieList = () => {
         <div className="mt-10 flex items-center justify-center">
           <Spinner />
         </div>
+      ) : error ? (
+        <ErrorMessage error />
       ) : (
         <div className="mx-5 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {movies.map((movie) => (
