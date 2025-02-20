@@ -41,7 +41,7 @@ const MovieInfo = () => {
           <Spinner />
         </div>
       ) : error ? (
-        <ErrorMessage error />
+        <ErrorMessage error={error} />
       ) : (
         <div className="m-5 rounded-lg border border-gray-300 p-3.5">
           <p>

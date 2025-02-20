@@ -1,5 +1,6 @@
 import MovieList from "./components/MovieList";
 import MovieInfo from "./components/MovieInfo";
+import MovieEdit from "./components/MovieEdit";
 import logo from "./assets/logo.png";
 import { Routes, Route } from "react-router-dom";
 
@@ -13,6 +14,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<MovieList />} />
           <Route path="/movie/details/:id" element={<MovieInfo />} />
+          <Route path="/movie/edit/:id" element={<MovieEdit />} />
         </Routes>
       </main>
     </div>
