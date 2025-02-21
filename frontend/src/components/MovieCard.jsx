@@ -8,8 +8,16 @@ import {
 import { SiRottentomatoes } from "react-icons/si";
 import { formatTime } from "../utils/formatTime.js";
 import { Link } from "react-router-dom";
+import deleteMovie from "./deleteMovie.js";
 
-const MovieCard = ({ _id, title, duration, releaseYear, rating }) => {
+const MovieCard = ({
+  _id,
+  title,
+  duration,
+  releaseYear,
+  rating,
+  setMovies,
+}) => {
   return (
     <div className="rounded-lg border border-gray-300 p-3.5">
       <div className="flex flex-col gap-y-1">
@@ -51,12 +59,12 @@ const MovieCard = ({ _id, title, duration, releaseYear, rating }) => {
             <MdEdit className="text-2xl text-amber-500 transition duration-150 hover:text-amber-700" />
           </Link>
 
-          <Link
-            to={`/movie/delete/${_id}`}
-            className="flex items-center justify-between"
-          >
-            <MdDelete className="text-2xl text-red-500 transition duration-150 hover:text-red-700" />
-          </Link>
+          <MdDelete
+            className="cursor-pointer text-2xl text-red-500 transition duration-150 hover:text-red-700"
+            onClick={() => {
+              deleteMovie(_id, setMovies);
+            }}
+          />
         </div>
       </div>
     </div>
